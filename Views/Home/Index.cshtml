@@ -1,0 +1,24 @@
+﻿@{
+
+}
+@model BooksViewModel
+
+<h1>Ellipedia: Books for Every Reader on Every Occassion</h1>
+
+<!--use our Model to write out the books-->
+
+@foreach (Book b in Model.Books)
+{
+    <h3>@b.Title</h3>
+    <ul>
+        <li>Author: @b.Author</li>
+        <li>Publisher: @b.Publisher</li>
+        <li>ISBN: @b.Isbn</li>
+        <li>Classification: @b.Classification</li>
+        <li>Category: @b.Category</li>
+        <li>Number of Pages: @b.PageCount</li>
+        <li>Price: @b.Price</li>
+    </ul><br />
+}
+
+<div page-model="@Model.PageInfo" page-action="Index"></div>
