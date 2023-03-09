@@ -2,22 +2,26 @@
     ViewBag.Title = "Ellipedia Bookstore";
 }
 @model BooksViewModel
+    <!--
+        CSS element 1: drop down menu: found under _Layout view
+        CSS element 2: was adding a text shadow to the title to make it stand out: found under BookSummary partial view
+    -->
 
-<h1>Ellipedia: Books for Every Reader on Every Occassion</h1>
+    <h1>Ellipedia: Books for Every Reader on Every Occassion</h1>
 
-<!--use our Model to write out the books-->
+    <!--use our Model to write out the books-->
 
-@foreach (Book b in Model.Books)
-{
-    <!--partial view Book Summary-->
-    <partial name="BookSummary" model="b" />
-}
+    @foreach (Book b in Model.Books)
+    {
+        <!--partial view Book Summary-->
+        <partial name="BookSummary" model="b" />
+    }
 
-<div page-model="@Model.PageInfo" page-action="Index" page-classes-enabled="true"
-     page-class="btn" page-class-normal="btn-outline-dark"
-     page-class-selected="btn-primary" class="btn-group pull-right m-1">
-</div>
+    <div page-model="@Model.PageInfo" page-action="Index" page-classes-enabled="true"
+         page-class="btn" page-class-normal="btn-outline-dark"
+         page-class-selected="btn-primary" class="btn-group pull-right m-1">
+    </div>
 
 
 
-<!--my two bootstrap elements!!-->
+    <!--my two bootstrap elements!!-->
