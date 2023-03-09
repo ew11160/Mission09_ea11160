@@ -14,6 +14,7 @@ namespace Mission09_ea11160.Models.Infrastructure
     [HtmlTargetElement("div", Attributes = "page-model")]
     public class PaginationTagHelper : TagHelper
     {
+        //dynamically create page links
         private IUrlHelperFactory uhf; 
 
         public PaginationTagHelper (IUrlHelperFactory temp)
@@ -26,8 +27,8 @@ namespace Mission09_ea11160.Models.Infrastructure
         public ViewContext vc { get; set; }
         public PageInfo PageModel { get; set; }
         public string PageAction { get; set; }
-        public bool PageClassesEnabled { get; set; } = false;
         public string PageClass { get; set; }
+        public bool PageClassesEnabled { get; set; }
         public string PageClassNormal { get; set; }
         public string PageClassSelected { get; set; }
         public override void Process (TagHelperContext thc, TagHelperOutput tho)
@@ -47,6 +48,7 @@ namespace Mission09_ea11160.Models.Infrastructure
                     tb.AddCssClass(PageClass);
                     tb.AddCssClass(i == PageModel.CurrentPage ? PageClassSelected : PageClassNormal);
                 }
+                tb.AddCssClass(PageClass);
                 
                 tb.InnerHtml.Append(i.ToString());
 
