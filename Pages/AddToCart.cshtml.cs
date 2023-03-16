@@ -12,30 +12,33 @@ namespace Mission09_ea11160.Pages
     public class AddToCartModel : PageModel
     {
         private IBookstoreRepository repo { get; set; }
-        public AddToCartModel (IBookstoreRepository temp)
-        {
-            repo = temp;
-        }
         public Cart cart { get; set; }
         public string ReturnUrl { get; set; }
+        public AddToCartModel (IBookstoreRepository temp, Cart c)
+        {
+            repo = temp;
+            cart = c;
+        }
+
         public void OnGet(string returnUrl)
         {
             ReturnUrl = returnUrl ?? "/";
-            cart = HttpContext.Session.GetJson<Cart>("cart") ?? new Cart();
         }
 
         public IActionResult OnPost(int bookId, string returnUrl)
         {
-            // find book associated with the ida
+            // find book associated with the id
             Book b = repo.Books.FirstOrDefault(x => x.BookId == bookId);
 
-            // check if they have a session
-            cart = HttpContext.Session.GetJson<Cart>("cart") ?? new Cart();
             cart.AddItem(b, 1);
 
-            // set json file based on cart so we keep it per person
-            HttpContext.Session.SetJson("cart", cart);
+            return RedirectToPage(new { ReturnUrl = returnUrl });
+        }
 
+        public IActionResult OnPostRemove(int bookId, string returnUrl)
+        {
+            // pulling from RemoveItem method
+            cart.RemoveItem(cart.Items.First(x => x.Book.BookId == bookId).Book);
             return RedirectToPage(new { ReturnUrl = returnUrl });
         }
     }

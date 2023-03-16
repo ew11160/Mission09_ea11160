@@ -4,7 +4,6 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    <link href="/lib/css/bootstrap.min.css" rel="stylesheet" />
     <style>
         li a, .dropbtn {
             display: inline-block;
@@ -47,22 +46,41 @@
             display: block;
         }
     </style>
+    <link href="/lib/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/lib/font-awesome/css/all.min.css" rel="stylesheet" />
 </head>
 
 <body>
     <div class="bg-dark text-white p-2">
-        <!--my first css element was creating a dropdown menu. The CSS styles are above, and the implementation is below-->
-        <ul>
-            <li class="navbar-brand ml-2 dropdown">BOOKSTORE</li>
-            <li class="dropdown">
-                <a href="javascript:void(0)" class="dropbtn">Dropdown</a>
-                <div class="dropdown-content">
-                    <a href="Home">Home</a>
-                    <a href="/AddToCart">Cart</a>
-                    <a href="#">Link 3</a>
+        <div class="container-fluid">
+            <div class="row">
+                <!-- This was one of my css elements from mission 10, but I couldn't get it to work with the right aligned shopping cart so just commented it out.
+                <ul>
+                    <li class="dropdown text-end">
+                        <a href="javascript:void(0)" class="dropbtn col navbar-brand ml-2">Bookstore</a>
+                        <div class="dropdown-content">
+                            <a href="#">Home</a>
+                            <a href="/AddToCart">Cart</a>
+                        </div>
+                    </li>
+                </ul>
+                -->
+                <div class="col navbar-brand">
+                    <ul>
+                        <li class="dropdown text-end">
+                            <a href="javascript:void(0)" class="dropbtn col navbar-brand ml-2">Bookstore</a>
+                            <div class="dropdown-content">
+                                <a href="#">Home</a>
+                                <a href="/AddToCart">Cart</a>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
-            </li>
-        </ul>
+                <div class="col-6 text-end">
+                    <vc:cart-summary />
+                </div>
+            </div>
+        </div>
     </div>
     <div class="row m-1 p-1">
         <div id="categories" class="col-3">

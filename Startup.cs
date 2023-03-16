@@ -34,6 +34,7 @@ namespace Mission09_ea11160
             });
 
             services.AddScoped<IBookstoreRepository, EFBookstoreRepository>();
+            services.AddScoped<ICheckOutRepository, EFCheckOutRepository>();
 
             // allow us to use razor pages
             services.AddRazorPages();
@@ -41,6 +42,9 @@ namespace Mission09_ea11160
             // allow for sessions
             services.AddDistributedMemoryCache();
             services.AddSession();
+
+            services.AddScoped<Cart>(x => SessionCart.GetCart(x));
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,12 +61,6 @@ namespace Mission09_ea11160
 
             app.UseEndpoints(endpoints =>
             {
-                // map a way back to the home page after filtering by category... should i make home a category?
-                //endpoints.MapControllerRoute(
-                //    name: "home",
-                //    pattern: "",
-                //    defaults: new { controller = "Home", action = "Index" });
-
                 // put them in the order you want them to read in, most specific first to least specific
                 endpoints.MapControllerRoute(
                     name: "categorypage",
